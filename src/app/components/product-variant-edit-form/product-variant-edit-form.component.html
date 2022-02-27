@@ -1,0 +1,19 @@
+<form [formGroup]="form" (ngSubmit)="onSaveVariant()">
+	<div class="row">
+		<div class="col-6">
+			<label for="description">Descripción</label>
+			<input type="text" formControlName="description" class="form-control" id="description" name="description" />
+		</div>
+		<div class="col-6">
+			<label for="inStock">Cantidad en stock</label>
+			<input type="number" formControlName="inStock" class="form-control" id="inStock" name="inStock" />
+		</div>
+	</div>
+
+	<br>
+
+	<div>
+		<button type="submit" class="btn btn-primary" [disabled]="!form.valid">Guardar</button>
+		<button type="button" class="btn btn-link ms-2 text-secondary" (click)="onCancel()">Cancelar</button>
+	</div>
+</form>

@@ -1,0 +1,58 @@
+<app-page-header
+    pageTitle="Productos"
+    [breadcrumbItems]="[
+        {name: 'Inicio', path: ''},
+        {name: 'Productos'}
+    ]"
+></app-page-header>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="page-widget">
+                <a routerLink="/products/new">
+                    <button class="btn btn-sm btn-success">
+							  <div>
+									<i class="fas fa-plus me-2"></i>
+									<span>Agregar producto</span>
+							  </div>
+                    </button>
+                </a>
+
+                <app-table tableType="products">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Descripcion</th>
+                            <th>Cantidad en stock</th>
+                            <!-- <th>Costo promedio (USD)</th>
+                            <th>Costo promedio (MXN)</th> -->
+                            <th>Precio recomendado</th>
+                            <th>Variantes</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let product of products">
+                            <td>{{ product.Id }}</td>
+                            <td>{{ product.Description }}</td>
+                            <td>{{ product.InStock }}</td>
+                            <!-- <td></td>
+                            <td></td> -->
+                            <td>{{ product.RecommendedPrice | currency }}</td>
+                            <td>
+                                {{ product.Variants.length }}
+                            </td>
+                            <td>
+                                <div class="d-flex justify-content-center">
+                                    <a title="Editar" [routerLink]="[product.Id, 'edit']" class="btn-action"><i class="fas fa-edit"></i></a>
+                                    <button title="Eliminar" (click)="openModal(product)" class="btn-transparent btn-action"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </app-table>
+            </div>
+        </div>
+    </div>
+</div>

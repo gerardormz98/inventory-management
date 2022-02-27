@@ -1,0 +1,80 @@
+<app-page-header pageTitle="Dashboard"></app-page-header>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-3">
+			<div class="page-widget">
+				<div class="number text-success">{{ completedSales }}</div>
+				<div class="page-widget-title w-100 text-center mb-0 mt-3">Ventas Concretadas</div>
+			</div>
+		</div>
+		<div class="col-3">
+			<div class="page-widget">
+				<div class="number">{{ totalExpenses | currency }}</div>
+				<div class="page-widget-title w-100 text-center mb-0 mt-3">Gastos</div>
+			</div>
+		</div>
+		<div class="col-3">
+			<div class="page-widget">
+				<div class="number">{{ totalIncome | currency }}</div>
+				<div class="page-widget-title w-100 text-center mb-0 mt-3">Ingresos</div>
+			</div>
+		</div>
+		<div class="col-3">
+			<div class="page-widget">
+				<div class="number" [ngClass]="{ 'text-danger': totalGainOrLoss < 0, 'text-success': totalGainOrLoss >= 0 }">
+					{{ totalGainOrLoss | currency }}
+				</div>
+				<div class="page-widget-title w-100 text-center mb-0 mt-3">Ganancia o pérdida</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-6">
+			<div class="page-widget">
+				<div class="page-widget-title">Ventas brutas</div>
+				<canvas
+					baseChart
+					[data]="{
+						datasets: [
+							{
+								label: 'Ventas',
+								data: lastSales,
+								backgroundColor: 'rgba(22, 165, 131, 0.2)',
+								borderColor: 'rgba(22, 165, 131, 0.8)',
+								pointBackgroundColor: 'rgba(22, 165, 131, 1)',
+								fill: true,
+								tension: 0.4
+							}
+						]
+					}"
+					[options]="chartOptions"
+					[type]="'line'"
+				>
+				</canvas>
+			</div>
+		</div>
+		<div class="col-6">
+			<div class="page-widget">
+				<div class="page-widget-title">Productos más vendidos</div>
+				<table class="table table-hover">
+					<thead class="table-light">
+						<tr>
+							<th>Cantidad</th>
+							<th>Producto</th>
+							<th>Variante</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let item of topOrderedProducts">
+							<td>{{ item.quantity }}</td>
+							<td>{{ item.product.Description }}</td>
+							<td>{{ item.variant.Description }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

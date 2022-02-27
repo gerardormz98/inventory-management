@@ -1,0 +1,100 @@
+<app-page-header
+	pageTitle="{{ isEditMode ? 'Editar' : 'Agregar' }} producto"
+	backUrl="/products"
+	[breadcrumbItems]="[
+		{ name: 'Inicio', path: '' },
+		{ name: 'Productos', path: '/products' },
+		{ name: isEditMode ? 'Editar' : 'Agregar' }
+	]"
+></app-page-header>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-12">
+			<div class="page-widget">
+				<div *ngIf="isEditMode">
+					<div class="productHeader">
+						<div class="d-flex align-items-end">
+							<h5 class="p-0 m-0">{{ product.Description }}</h5>
+							<span class="ms-2">#{{ product.Id }}</span>
+						</div>
+						<span class="mt-2 d-block"> Added Date: {{ product.AddedDate | date: 'd/MM/yyyy' }} </span>
+					</div>
+
+					<hr />
+				</div>
+
+				<form [formGroup]="form" (ngSubmit)="onSaveProduct()">
+					<label for="description">Descripción</label>
+					<input type="text" formControlName="description" class="form-control" id="description" name="description" />
+					<br />
+
+					<label for="recommendedPrice">Precio recomendado</label>
+					<input
+						type="number"
+						formControlName="recommendedPrice"
+						class="form-control"
+						id="recommendedPrice"
+						name="recommendedPrice"
+					/>
+					<br />
+
+					<div>
+						<button type="submit" class="btn btn-primary" [disabled]="!form.valid">Guardar</button>
+						<button type="button" class="btn btn-link ms-2 text-secondary" (click)="onCancel()">Cancelar</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="row" *ngIf="isEditMode">
+		<div class="col-12">
+			<div class="page-widget">
+				<div class="page-widget-title">Variantes</div>
+				<button class="btn btn-sm btn-success d-block" [disabled]="isEditingVariant" (click)="onEditVariant(0)">
+					<i class="fas fa-plus"></i>
+					<span class="ms-2">Agregar variante</span>
+				</button>
+
+				<div class="mt-3" *ngIf="isEditingVariant">
+					<app-product-variant-edit-form
+						[variantId]="variantEditingId"
+						[productId]="id"
+						(saveVariant)="isEditingVariant = false"
+						(cancelVariantEdit)="isEditingVariant = false"
+					></app-product-variant-edit-form>
+					<hr />
+				</div>
+
+				<app-table tableType="productVariants">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Descripción de producto</th>
+							<th>Modelo</th>
+							<th>Cantidad en stock</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let variant of product.Variants">
+							<td>{{ variant.Id }}</td>
+							<td>{{ product.Description }}</td>
+							<td>{{ variant.Description }}</td>
+							<td>{{ variant.InStock }}</td>
+							<td class="d-flex justify-content-center">
+								<button title="Editar" (click)="onEditVariant(variant.Id)" [disabled]="isEditingVariant" class="btn-transparent btn-action">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button title="Eliminar" (click)="openModal(variant)" class="btn-transparent btn-action" *ngIf="product.Variants.length > 1">
+									<i class="fas fa-trash"></i>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</app-table>
+			</div>
+		</div>
+	</div>
+</div>

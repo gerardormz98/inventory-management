@@ -1,1 +1,74 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&display=swap');
+
+html {
+	font-size: 15px;
+}
+
+body {
+	/* font-family: 'Lato', sans-serif; */
+	/* font-family: 'Montserrat', sans-serif; */
+	/* font-family: 'Rubik', sans-serif; */
+	font-family: 'Nunito', sans-serif;
+	height: calc(100vh - 52.5px);
+}
+
+.btn-sm {
+	font-size: 14px;
+}
+
+.page-widget {
+	padding: 1.5rem;
+	margin-bottom: 1rem;
+	background-color: white;
+	box-shadow: 1px 10px 19px 0px rgba(0, 0, 0, 0.05);
+	-webkit-box-shadow: 1px 10px 19px 0px rgba(0, 0, 0, 0.05);
+	-moz-box-shadow: 1px 10px 19px 0px rgba(0, 0, 0, 0.05);
+}
+
+.page-widget-title {
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 1rem;
+	margin-bottom: 1rem;
+	color: #6c757d;
+	display: inline-block;
+}
+
+.app-table td,
+.app-table th,
+table td,
+table th {
+	line-height: 30px;
+	vertical-align: middle;
+}
+
+tbody {
+	border-top: none !important;
+}
+
+.btn-transparent {
+	background: none;
+	border: none;
+	padding: 0;
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+}
+
+::-webkit-scrollbar-track {
+	background: none;
+}
+
+::-webkit-scrollbar-thumb {
+	background: rgb(170, 170, 170);
+	border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: rgb(150, 150, 150);
+}

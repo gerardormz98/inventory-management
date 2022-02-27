@@ -1,0 +1,124 @@
+<app-page-header
+	pageTitle="Detalles de Venta #{{ orderId }}"
+	backUrl="/orders"
+	[breadcrumbItems]="[
+		{ name: 'Inicio', path: '' },
+		{ name: 'Ventas', path: '/orders' },
+		{ name: 'Detalle' }
+	]"
+></app-page-header>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-8">
+			<div class="page-widget">
+				<div class="d-flex justify-content-between align-items-start">
+					<h5 class="page-widget-title">Datos Generales</h5>
+					<span class="badge rounded-pill bg-success">Completada</span>
+				</div>
+
+				<hr class="mt-0" />
+
+				<div class="mb-2">
+					<b class="me-2">Fecha:</b>
+					<span>{{ order.Date | date: "dd/MM/YYYY" }}</span>
+				</div>
+				<div class="mb-2">
+					<b class="me-2">Plataforma de venta:</b>
+					<span>{{ order.Platform }}</span>
+				</div>
+				<div class="mb-2">
+					<b class="me-2">Cliente:</b>
+					<span>{{ order.Client }}</span>
+				</div>
+				<div class="mb-2">
+					<b class="me-2">Forma de pago:</b>
+					<span>?</span>
+				</div>
+
+					<button [routerLink]="['/orders', order.Id, 'edit']" class="btn btn-sm btn-secondary mt-2"><span>Editar Orden</span></button>
+			</div>
+
+			<div class="page-widget">
+				<h5 class="page-widget-title">Productos de la orden</h5>
+				<table class="table table-hover">
+					<thead class="table-light">
+						<tr>
+							<th>Cantidad</th>
+							<th>Producto</th>
+							<th>Variante</th>
+							<th>Precio Unitario</th>
+							<th>Total</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let detail of order.OrderDetails">
+							<td>{{ detail.Quantity }}</td>
+							<td>{{ detail.Product.Description }}</td>
+							<td>{{ detail.ProductVariant.Description }}</td>
+							<td>{{ detail.UnitPrice | currency }}</td>
+							<td>{{ detail.TotalPrice | currency }}</td>
+						</tr>
+						<tr class="fw-bold table-light">
+							<td colspan="4">TOTAL</td>
+							<td>{{ order.Total | currency }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="col-4">
+			<div class="page-widget">
+				<h5 class="page-widget-title">Resumen</h5>
+				<hr class="mt-0" />
+				<table class="table table-hover">
+					<tbody>
+						<tr>
+							<td>Subtotal</td>
+							<td>{{ order.Subtotal | currency }}</td>
+						</tr>
+						<tr>
+							<td>IVA</td>
+							<td>{{ order.IVA | currency }}</td>
+						</tr>
+						<tr class="table-light fw-bold">
+							<th>Total</th>
+							<td>{{ order.Total | currency }}</td>
+						</tr>
+						<tr>
+							<td class="ps-4">(-) Comisiones</td>
+							<td class="text-danger">
+								- {{ order.Commission | currency }}
+							</td>
+						</tr>
+						<tr>
+							<td class="ps-4">(-) Costo de Envío</td>
+							<td class="text-danger">
+								- {{ order.ShippingCost | currency }}
+							</td>
+						</tr>
+						<tr>
+							<td class="ps-4">(-) Retención de IVA</td>
+							<td class="text-danger">
+								- {{ order.IVAWithholding | currency }}
+							</td>
+						</tr>
+						<tr>
+							<td class="ps-4">(-) Retención de ISR</td>
+							<td class="text-danger">
+								- {{ order.ISRWithholding | currency }}
+							</td>
+						</tr>
+						<tr class="table-light fw-bold">
+							<th>Ingreso Final</th>
+							<td class="text-success">
+								{{ order.Revenue | currency }}
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

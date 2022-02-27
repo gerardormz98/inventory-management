@@ -1,0 +1,11 @@
+<div class="modal-header">
+    <h5 class="modal-title">{{ title }}</h5>
+    <button type="button" class="btn-transparent" aria-label="Close" (click)="activeModal.close()">
+    <i class="fas fa-times"></i>
+    </button>
+</div>
+<div class="modal-body" [innerHtml]="bodyHTML"></div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-sm btn-outline" (click)="activeModal.close()">Cancelar</button>
+    <button type="button" class="btn btn-sm btn-danger" (click)="activeModal.close('Confirm')">{{ confirmText }}</button>
+</div>

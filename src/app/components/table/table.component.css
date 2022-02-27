@@ -1,0 +1,14 @@
+.app-table .btn-action {
+    margin: 0 0.3rem 0 0.3rem;
+    font-size: 1rem;
+}
+
+.app-table .btn-action,
+.app-table a {
+    color: #98A6AD;
+}
+
+.app-table .btn-action:hover ,
+.app-table a:hover {
+    color: #747d81;
+}

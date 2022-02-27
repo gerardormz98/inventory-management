@@ -1,0 +1,39 @@
+.header-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+li {
+	color: #979997;
+}
+
+li a {
+	text-decoration: none;
+}
+
+h5 {
+	font-weight: bold;
+	padding: 0;
+	margin: 0;
+	font-size: 1.3rem;
+}
+
+h5,
+.btnRegresar {
+	color: #6c757d;
+}
+
+.btnRegresar {
+	font-size: 1.15rem;
+	cursor: pointer;
+	margin-bottom: 2px;
+}
+
+ol {
+	margin: 0;
+}
+
+.btnRegresar:hover {
+	color: #41464b;
+}

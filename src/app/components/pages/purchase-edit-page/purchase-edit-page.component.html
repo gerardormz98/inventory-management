@@ -1,0 +1,220 @@
+<app-page-header
+	pageTitle="{{ isEditMode ? 'Editar' : 'Nuevo' }} Pedido {{ isEditMode ? '#' + purchase.Id : '' }}"
+	backUrl="/purchases"
+	[breadcrumbItems]="[
+		{ name: 'Inicio', path: '' },
+		{ name: 'Compras', path: '/Purchases' },
+		{ name: isEditMode ? 'Editar' : 'Nueva' }
+	]"
+></app-page-header>
+
+<form [formGroup]="form" (ngSubmit)="onSavePurchase()">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12">
+				<div class="page-widget">
+					<h5 class="page-widget-title d-block">Datos Generales</h5>
+
+					<div class="row">
+						<div class="col-6">
+							<label for="date">Fecha</label>
+							<input type="date" formControlName="date" class="form-control" id="date" name="date" appAutofocus />
+						</div>
+
+						<div class="col-6">
+							<label for="supplier">Proveedor</label>
+							<input type="text" formControlName="supplier" class="form-control" id="supplier" name="supplier" />
+						</div>
+					</div>
+
+					<br />
+
+					<div class="row">
+						<div class="col-12">
+							<label for="description">Descripción</label>
+							<textarea
+								rows="3"
+								formControlName="description"
+								class="form-control"
+								id="description"
+								name="description"
+							></textarea>
+						</div>
+					</div>
+
+					<br />
+
+					<div class="row">
+						<div class="col-2">
+							<label for="goodsCostUSD">Costo de mercancía (USD)</label>
+							<input
+								type="number"
+								formControlName="goodsCostUSD"
+								class="form-control"
+								id="goodsCostUSD"
+								name="goodsCostUSD"
+							/>
+						</div>
+						<div class="col-2">
+							<label for="commissionUSD">Comisiones (USD)</label>
+							<input
+								type="number"
+								formControlName="commissionUSD"
+								class="form-control"
+								id="commissionUSD"
+								name="commissionUSD"
+							/>
+						</div>
+						<div class="col-2">
+							<label for="shippingCostUSD">Costo de Envío (USD)</label>
+							<input
+								type="number"
+								formControlName="shippingCostUSD"
+								class="form-control"
+								id="shippingCostUSD"
+								name="shippingCostUSD"
+							/>
+						</div>
+						<div class="col-2">
+							<label for="goodsCommissionAndShippingMXN">Total pedido (MXN)</label>
+							<input
+								type="number"
+								formControlName="goodsCommissionAndShippingMXN"
+								class="form-control"
+								id="goodsCommissionAndShippingMXN"
+								name="goodsCommissionAndShippingMXN"
+							/>
+						</div>
+						<div class="col-2">
+							<label for="importCostUSD">Gastos de Importación (USD)</label>
+							<input
+								type="number"
+								formControlName="importCostUSD"
+								class="form-control"
+								id="importCostUSD"
+								name="importCostUSD"
+							/>
+						</div>
+						<div class="col-2">
+							<label for="importCostMXN">Gastos de Importación (MXN)</label>
+							<input
+								type="number"
+								formControlName="importCostMXN"
+								class="form-control"
+								id="importCostMXN"
+								name="importCostMXN"
+							/>
+						</div>
+					</div>
+				</div>
+
+				<div class="page-widget mt-3">
+					<h5 class="page-widget-title d-block">Productos del Pedido</h5>
+
+					<div formArrayName="purchaseDetails">
+						<button type="button" class="btn btn-sm btn-success" (click)="onAddDetail()">
+							<i class="fas fa-plus me-2"></i>Agregar
+						</button>
+
+						<br />
+						<br />
+
+						<ng-container *ngFor="let detail of purchaseDetailsControls; let i = index">
+							<div [formGroup]="detail" class="mb-3">
+								<div class="row">
+									<div class="col-3">
+										<label for="product">Producto</label>
+										<select
+											formControlName="product"
+											(change)="onChangeProduct(i, detail.get('product')?.value)"
+											class="form-select"
+											name="product"
+											id="product"
+										>
+											<option *ngFor="let product of products" [value]="product.Id">
+												{{ product.Description }}
+											</option>
+										</select>
+									</div>
+
+									<div class="col-3">
+										<label for="productVariant">Variante</label>
+										<select
+											formControlName="productVariant"
+											class="form-select"
+											name="productVariant"
+											id="productVariant"
+										>
+											<option
+												*ngFor="let variant of getFilteredVariants(detail.get('product')?.value)"
+												[value]="variant.Id"
+											>
+												{{ variant.Description }}
+											</option>
+										</select>
+									</div>
+
+									<div class="col-6 d-flex justify-content-between align-items-end">
+										<div class="d-flex w-100">
+											<div class="flex-fill">
+												<label for="quantity">Cantidad</label>
+												<input
+													type="number"
+													formControlName="quantity"
+													class="form-control"
+													id="quantity"
+													name="quantity"
+												/>
+											</div>
+											<div class="flex-fill ms-3">
+												<label for="unitPriceUSD">Precio Unitario (USD)</label>
+												<input
+													type="number"
+													formControlName="unitPriceUSD"
+													class="form-control"
+													id="unitPriceUSD"
+													name="unitPriceUSD"
+												/>
+											</div>
+											<div class="flex-fill ms-3">
+												<label for="unitPriceMXN">Precio Unitario (MXN)</label>
+												<input
+													type="number"
+													formControlName="unitPriceMXN"
+													class="form-control"
+													id="unitPriceMXN"
+													name="unitPriceMXN"
+												/>
+											</div>
+										</div>
+										<button
+											type="button"
+											class="btn btn-sm btn-danger ms-3 mb-1"
+											[disabled]="purchaseDetailsControls.length == 1"
+											(click)="onRemoveDetail(i)"
+										>
+											<i class="fas fa-trash-alt"></i>
+										</button>
+									</div>
+								</div>
+							</div>
+						</ng-container>
+					</div>
+				</div>
+
+				<div class="page-widget d-flex justify-content-between align-items-center">
+					<div class="fs-6">
+						<span
+							>Total (MXN): <b class="text-danger">{{ getCurrentPurchaseTotal() | currency }}</b>
+							<span class="text-secondary"> (pedido + importación)</span></span
+						>
+					</div>
+					<div>
+						<button type="button" class="btn btn-link ms-2 text-secondary" (click)="onCancel()">Cancelar</button>
+						<button type="submit" class="btn btn-primary" [disabled]="!form.valid">Guardar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

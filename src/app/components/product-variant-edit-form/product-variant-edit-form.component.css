@@ -1,0 +1,12 @@
+label {
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+}
+
+.productHeader span {
+    color: #979997;
+}
+
+button {
+    text-decoration: none;
+}

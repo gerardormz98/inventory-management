@@ -1,0 +1,25 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-12">
+			<div class="header-container py-2 mb-3">
+				<div class="d-flex align-items-center">
+					<a [routerLink]="backUrl" *ngIf="backUrl">
+						<i class="fas fa-arrow-left btnRegresar" title="Regresar"></i>
+					</a>
+					<h5 [ngClass]="{ 'ms-3': backUrl }">{{ pageTitle }}</h5>
+				</div>
+
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li
+							*ngFor="let item of breadcrumbItems"
+							class="breadcrumb-item"
+						>
+							<a [routerLink]="item.path">{{ item.name }}</a>
+						</li>
+					</ol>
+				</nav>
+			</div>
+		</div>
+	</div>
+</div>

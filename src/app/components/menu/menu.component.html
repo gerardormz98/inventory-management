@@ -1,0 +1,69 @@
+
+<div class="menu-container" [ngClass]="{'collapsed': !isOpen}">
+    <!-- <button (click)="onToggle()" [title]="isOpen ? 'Colapsar menú' : 'Mostrar menú'">
+        <div *ngIf="isOpen">
+            <i class="fas fa-chevron-left fa-xs"></i>
+            <i class="fas fa-chevron-left fa-xs"></i>
+        </div>
+        <div *ngIf="!isOpen">
+            <i class="fas fa-chevron-right fa-xs"></i>
+            <i class="fas fa-chevron-right fa-xs"></i>
+        </div>
+    </button> -->
+
+    <ul class="pt-4">
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <a routerLink="" title="Dashboard">
+                <i class="fas fa-home"></i>
+                <span *ngIf="isOpen">Dashboard</span>
+            </a>
+        </li>
+
+        <hr>
+
+        <li routerLinkActive="active">
+            <a routerLink="products" title="Productos">
+                <i class="fas fa-shopping-basket"></i>
+                <span *ngIf="isOpen">Productos</span>
+            </a>
+        </li>
+        <li routerLinkActive="active">
+            <a routerLink="orders" title="Ventas">
+                <i class="fas fa-store"></i>
+                <span *ngIf="isOpen">Ventas</span>
+            </a>
+        </li>
+        <li routerLinkActive="active">
+            <a routerLink="purchases" title="Compras">
+                <i class="fas fa-shopping-bag"></i>
+                <span *ngIf="isOpen">Compras</span>
+            </a>
+        </li>
+
+        <!-- <hr>
+
+        <li routerLinkActive="active">
+            <a routerLink="expenses" title="Otros Gastos">
+                <i class="fas fa-receipt"></i>
+                <span *ngIf="isOpen">Otros Gastos</span>
+            </a>
+        </li>
+        <li routerLinkActive="active">
+            <a routerLink="taxes" title="Impuestos">
+                <i class="fas fa-money-bill"></i>
+                <span *ngIf="isOpen">Impuestos</span>
+            </a>
+        </li> -->
+    </ul>
+
+    <button (click)="onToggle()" [title]="isOpen ? 'Colapsar menú' : 'Mostrar menú'">
+        <div *ngIf="isOpen">
+            <i class="fas fa-chevron-left fa-xs"></i>
+            <i class="fas fa-chevron-left fa-xs"></i>
+        </div>
+        <div *ngIf="!isOpen">
+            <i class="fas fa-chevron-right fa-xs"></i>
+            <i class="fas fa-chevron-right fa-xs"></i>
+        </div>
+    </button>
+</div>

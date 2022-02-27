@@ -1,0 +1,55 @@
+<app-page-header pageTitle="Ventas" [breadcrumbItems]="[{ name: 'Inicio', path: '' }, { name: 'Ventas' }]"></app-page-header>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-12">
+			<div class="page-widget">
+				<button routerLink="/orders/new" class="btn btn-sm btn-success">
+					<div>
+						<i class="fas fa-plus me-2"></i>
+						<span>Nueva venta</span>
+					</div>
+				</button>
+
+				<app-table tableType="orders">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Fecha</th>
+							<th>Plataforma de Venta</th>
+							<th>Cliente</th>
+							<th>Total</th>
+							<th>Comisiones</th>
+							<th>Costo de envío</th>
+							<th>Retenciones</th>
+							<th>Ingreso</th>
+							<th>Detalles</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let order of orders">
+							<td>{{ order.Id }}</td>
+							<td>{{ order.Date | date: 'd/MM/yyyy' }}</td>
+							<td>{{ order.Platform }}</td>
+							<td>{{ order.Client }}</td>
+							<td>{{ order.Total | currency }}</td>
+							<td class="text-danger">{{ order.Commission | currency }}</td>
+							<td class="text-danger">{{ order.ShippingCost | currency }}</td>
+							<td class="text-danger">{{ order.IVAWithholding + order.ISRWithholding | currency }}</td>
+							<td class="text-success">{{ order.Revenue | currency }}</td>
+							<td>
+								<button class="btn btn-sm btn-secondary" [routerLink]="[order.Id]"><span>Detalles</span></button>
+							</td>
+							<td>
+								<div class="d-flex justify-content-center">
+									<a title="Editar" [routerLink]="[order.Id, 'edit']" class="btn-action"><i class="fas fa-edit"></i></a>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</app-table>
+			</div>
+		</div>
+	</div>
+</div>

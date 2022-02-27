@@ -1,0 +1,184 @@
+<app-page-header
+	pageTitle="{{ isEditMode ? 'Editar' : 'Nueva' }} Venta {{ isEditMode ? '#' + order.Id : '' }}"
+	backUrl="/orders"
+	[breadcrumbItems]="[
+		{ name: 'Inicio', path: '' },
+		{ name: 'Ventas', path: '/orders' },
+		{ name: isEditMode ? 'Editar' : 'Nueva' }
+	]"
+></app-page-header>
+
+<form [formGroup]="form" (ngSubmit)="onSaveOrder()">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12">
+				<div class="page-widget">
+					<h5 class="page-widget-title d-block">Datos Generales</h5>
+
+					<div class="row">
+						<div class="col-6">
+							<label for="date">Fecha</label>
+							<input type="date" formControlName="date" class="form-control" id="date" name="date" appAutofocus />
+						</div>
+
+						<div class="col-6">
+							<label for="platform">Plataforma de Venta</label>
+							<select formControlName="platform" class="form-select" name="platform" id="platform">
+								<option value="MercadoShop">MercadoShop</option>
+								<option value="MercadoLibre">MercadoLibre</option>
+								<option value="Facebook">Facebook</option>
+								<option value="Whatsapp">Whatsapp</option>
+							</select>
+						</div>
+					</div>
+
+					<br />
+
+					<div class="row">
+						<div class="col-12">
+							<label for="client">Cliente</label>
+							<input type="text" formControlName="client" class="form-control" id="client" name="client" />
+						</div>
+					</div>
+
+					<br />
+
+					<div class="row">
+						<div class="col-3">
+							<label for="commission">Comisiones</label>
+							<input type="number" formControlName="commission" class="form-control" id="commission" name="commission" />
+						</div>
+						<div class="col-3">
+							<label for="shippingCost">Costo de Envío</label>
+							<input
+								type="number"
+								formControlName="shippingCost"
+								class="form-control"
+								id="shippingCost"
+								name="shippingCost"
+							/>
+						</div>
+						<div class="col-3">
+							<label for="IVAWithholding">IVA Retenido</label>
+							<input
+								type="number"
+								formControlName="IVAWithholding"
+								class="form-control"
+								id="IVAWithholding"
+								name="IVAWithholding"
+							/>
+						</div>
+						<div class="col-3">
+							<label for="ISRWithholding">ISR Retenido</label>
+							<input
+								type="number"
+								formControlName="ISRWithholding"
+								class="form-control"
+								id="ISRWithholding"
+								name="ISRWithholding"
+							/>
+						</div>
+					</div>
+				</div>
+
+				<div class="page-widget mt-3">
+					<h5 class="page-widget-title d-block">Productos de la Orden</h5>
+
+					<div formArrayName="orderDetails">
+						<button type="button" class="btn btn-sm btn-success" (click)="onAddDetail()">
+							<i class="fas fa-plus me-2"></i>Agregar
+						</button>
+
+						<br />
+						<br />
+
+						<ng-container *ngFor="let detail of orderDetailsControls; let i = index">
+							<div [formGroup]="detail" class="mb-3">
+								<div class="row">
+									<div class="col-4">
+										<label for="product">Producto</label>
+										<select
+											formControlName="product"
+											(change)="onChangeProduct(i, detail.get('product')?.value)"
+											class="form-select"
+											name="product"
+											id="product"
+										>
+											<option *ngFor="let product of products" [value]="product.Id">
+												{{ product.Description }}
+											</option>
+										</select>
+									</div>
+
+									<div class="col-4">
+										<label for="productVariant">Variante</label>
+										<select
+											formControlName="productVariant"
+											class="form-select"
+											name="productVariant"
+											id="productVariant"
+										>
+											<option
+												*ngFor="let variant of getFilteredVariants(detail.get('product')?.value)"
+												[value]="variant.Id"
+											>
+												{{ variant.Description }}
+											</option>
+										</select>
+									</div>
+
+									<div class="col-4 d-flex justify-content-between align-items-end">
+										<div class="d-flex w-100">
+											<div class="flex-fill">
+												<label for="quantity">Cantidad</label>
+												<input
+													type="number"
+													formControlName="quantity"
+													class="form-control"
+													id="quantity"
+													name="quantity"
+												/>
+											</div>
+											<div class="flex-fill ms-3">
+												<label for="unitPrice">Precio Unitario</label>
+												<input
+													type="number"
+													formControlName="unitPrice"
+													class="form-control"
+													id="unitPrice"
+													name="unitPrice"
+												/>
+											</div>
+										</div>
+										<button
+											type="button"
+											class="btn btn-sm btn-danger ms-3 mb-1"
+											[disabled]="orderDetailsControls.length == 1"
+											(click)="onRemoveDetail(i)"
+										>
+											<i class="fas fa-trash-alt"></i>
+										</button>
+									</div>
+								</div>
+							</div>
+						</ng-container>
+					</div>
+				</div>
+
+				<div class="page-widget d-flex justify-content-between align-items-center">
+					<div class="fs-6">
+						<span>Total: <b>{{ getCurrentOrderDetailTotal() | currency }}</b></span>
+						<span class="mx-2">/</span>
+						<span>Comisiones: <b class="text-danger">{{ getCurrentOrderCommissions() | currency }}</b></span>
+						<span class="mx-2">/</span>
+						<span>Ingreso: <b class="text-success">{{ getCurrentOrderRevenue() | currency }}</b></span>
+					</div>
+					<div>
+						<button type="button" class="btn btn-link ms-2 text-secondary" (click)="onCancel()">Cancelar</button>
+						<button type="submit" class="btn btn-primary" [disabled]="!form.valid">Guardar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

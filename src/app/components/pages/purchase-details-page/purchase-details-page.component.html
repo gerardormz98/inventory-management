@@ -1,0 +1,94 @@
+<app-page-header
+	pageTitle="Detalles de Compra #{{ purchaseId }}"
+	backUrl="/purchases"
+	[breadcrumbItems]="[
+		{ name: 'Inicio', path: '' },
+		{ name: 'Compras', path: '/purchases' },
+		{ name: 'Detalle' }
+	]"
+></app-page-header>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-8">
+			<div class="page-widget">
+				<div class="d-flex justify-content-between align-items-start">
+					<h5 class="page-widget-title">Datos Generales</h5>
+					<span class="badge rounded-pill bg-success">Completada</span>
+				</div>
+
+				<hr class="mt-0" />
+
+				<div class="mb-2">
+					<b class="me-2">Fecha:</b>
+					<span>{{ purchase.Date | date: "dd/MM/YYYY" }}</span>
+				</div>
+				<div class="mb-2">
+					<b class="me-2">Proveedor:</b>
+					<span>{{ purchase.Supplier }}</span>
+				</div>
+				<div class="mb-2">
+					<b class="me-2">Descripción:</b>
+					<span>{{ purchase.Description }}</span>
+				</div>
+
+				<button [routerLink]="['/purchases', purchase.Id, 'edit']" class="btn btn-sm btn-secondary mt-2"><span>Editar Compra</span></button>
+			</div>
+
+			<div class="page-widget">
+				<h5 class="page-widget-title">Productos del pedido</h5>
+				<table class="table table-hover">
+					<thead class="table-light">
+						<tr>
+							<th>Cantidad</th>
+							<th>Producto</th>
+							<th>Variante</th>
+							<th>Costo Unitario</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let detail of purchase.PurchaseDetails">
+							<td>{{ detail.Quantity }}</td>
+							<td>{{ detail.Product.Description }}</td>
+							<td>{{ detail.ProductVariant.Description }}</td>
+							<td>{{ detail.UnitPriceMXN | currency }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="col-4">
+			<div class="page-widget">
+				<h5 class="page-widget-title">Resumen</h5>
+				<hr class="mt-0" />
+				<table class="table table-hover">
+					<tbody>
+						<tr>
+							<td>Total Mercancía</td>
+							<td>{{ purchase.GoodsCostMXN | currency }}</td>
+						</tr>
+						<tr>
+							<td>Comisiones</td>
+							<td>{{ purchase.CommissionMXN | currency }}</td>
+						</tr>
+						<tr>
+							<th>Costo de Envío</th>
+							<td>{{ purchase.ShippingCostMXN | currency }}</td>
+						</tr>
+						<tr>
+							<th>Gastos de Importación</th>
+							<td>{{ purchase.ImportCostMXN | currency }}</td>
+						</tr>
+						<tr class="table-light fw-bold">
+							<th>Costo Total</th>
+							<td class="text-danger">
+								{{ purchase.TotalMXN | currency }}
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
