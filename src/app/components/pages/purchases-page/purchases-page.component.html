@@ -1,8 +1,8 @@
 <app-page-header
-    pageTitle="Compras"
+    pageTitle="Purchases"
     [breadcrumbItems]="[
-        {name: 'Inicio', path: ''},
-        {name: 'Compras'}
+        {name: 'Home', path: ''},
+        {name: 'Purchases'}
     ]"
 ></app-page-header>
 
@@ -13,7 +13,7 @@
 				<button routerLink="/purchases/new" class="btn btn-sm btn-success">
 					<div>
 						<i class="fas fa-plus me-2"></i>
-						<span>Nueva compra</span>
+						<span>New purchase</span>
 					</div>
 				</button>
 
@@ -21,17 +21,17 @@
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>Fecha</th>
-							<th>Proveedor</th>
-							<th>Descripción</th>
-							<th>Total Mercancía (USD)</th>
-							<th>Comisiones (USD)</th>
-							<th>Costo de Envío (USD)</th>
-							<th>Gastos de Importación (USD)</th>
+							<th>Date</th>
+							<th>Supplier</th>
+							<th>Description</th>
+							<th>Goods Cost (USD)</th>
+							<th>Commission (USD)</th>
+							<th>Shipping Cost (USD)</th>
+							<th>Import Duties (USD)</th>
 							<th>Total (USD)</th>
 							<th>Total (MXN)</th>
-							<th>Detalles</th>
-							<th>Acciones</th>
+							<th>Details</th>
+							<th>Actions</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -47,11 +47,11 @@
 							<td>{{ purchase.TotalUSD | currency }}</td>
 							<td>{{ purchase.TotalMXN | currency }}</td>
 							<td>
-								<button class="btn btn-sm btn-secondary" [routerLink]="[purchase.Id]"><span>Detalles</span></button>
+								<button class="btn btn-sm btn-secondary" [routerLink]="[purchase.Id]"><span>Details</span></button>
 							</td>
 							<td>
 								<div class="d-flex justify-content-center">
-									<a title="Editar" [routerLink]="[purchase.Id, 'edit']" class="btn-action"><i class="fas fa-edit"></i></a>
+									<a title="Edit" [routerLink]="[purchase.Id, 'edit']" class="btn-action"><i class="fas fa-edit"></i></a>
 								</div>
 							</td>
 						</tr>

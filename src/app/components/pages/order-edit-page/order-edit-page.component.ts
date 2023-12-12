@@ -141,7 +141,28 @@ export class OrderEditPageComponent implements OnInit {
 		return this.productVariants.filter((v) => v.ProductId == productId);
 	}
 
+	private areOrderVariantsUnique() {
+		let uniqueVariants = new Set();
+
+		for (let detail of this.form.value.orderDetails) {
+		  let variantId = detail.productVariant.toString();
+
+		  if (uniqueVariants.has(variantId)) {
+			 return false;
+		  }
+
+		  uniqueVariants.add(variantId);
+		}
+
+		return true;
+	 }
+
 	onSaveOrder() {
+		if (!this.areOrderVariantsUnique()) {
+			alert("All variants in the order must be unique.");
+			return;
+		}
+
 		const values = this.form.value;
 
 		this.order.Date = values.date;

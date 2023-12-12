@@ -13,11 +13,11 @@ export class OrdersService {
 	ordersChanged = new Subject<Order[]>();
 
 	private orders: Order[] = [
-		new Order(1, new Date('2021-12-10'), 'MercadoLibre', 'Peter Parker', 67.35, 93.6, 30.97, 3.87, [
+		new Order(1, new Date('2021-12-10'), 'Amazon', 'Peter Parker', 67.35, 93.6, 30.97, 3.87, [
 			new OrderDetail(1, 1, 1, 2, 449),
 		]),
 		new Order(2, new Date('2021-12-15'), 'Facebook', 'Doctor Strange', 0, 120, 0, 0, [new OrderDetail(2, 1, 1, 1, 500)]),
-		new Order(3, new Date('2021-12-15'), 'MercadoLibre', 'Tony Stark', 149.7, 156, 68.82, 8.6, [
+		new Order(3, new Date('2021-12-15'), 'Amazon', 'Tony Stark', 149.7, 156, 68.82, 8.6, [
 			new OrderDetail(3, 1, 2, 10, 599),
 			new OrderDetail(3, 1, 5, 5, 599),
 		]),
@@ -64,7 +64,7 @@ export class OrdersService {
 			return orderClone;
 		}
 
-		return new Order(0, new Date(), 'MercadoShop', '', 0, 0, 0, 0, [new OrderDetail(0, 0, 0, 1, 0)]);
+		return new Order(0, new Date(), 'Amazon', '', 0, 0, 0, 0, [new OrderDetail(0, 0, 0, 1, 0)]);
 	}
 
 	updateOrder(order: Order) {
@@ -77,7 +77,7 @@ export class OrdersService {
 
 		order.OrderDetails.forEach((d) => {
 			const variant = this.productVariantService.getProductVariant(d.ProductVariantId);
-			const originalQuantity = originalOrderDetails.find((d) => d.ProductVariantId == variant.Id).Quantity;
+			const originalQuantity = originalOrderDetails.find((d) => d.ProductVariantId == variant.Id)?.Quantity ?? 0;
 
 			variant.InStock -= d.Quantity - originalQuantity;
 			this.productVariantService.updateProductVariant(variant);

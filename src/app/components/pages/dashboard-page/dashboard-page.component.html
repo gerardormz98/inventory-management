@@ -5,19 +5,19 @@
 		<div class="col-3">
 			<div class="page-widget">
 				<div class="number text-success">{{ completedSales }}</div>
-				<div class="page-widget-title w-100 text-center mb-0 mt-3">Ventas Concretadas</div>
+				<div class="page-widget-title w-100 text-center mb-0 mt-3">Completed orders</div>
 			</div>
 		</div>
 		<div class="col-3">
 			<div class="page-widget">
 				<div class="number">{{ totalExpenses | currency }}</div>
-				<div class="page-widget-title w-100 text-center mb-0 mt-3">Gastos</div>
+				<div class="page-widget-title w-100 text-center mb-0 mt-3">Expenses</div>
 			</div>
 		</div>
 		<div class="col-3">
 			<div class="page-widget">
 				<div class="number">{{ totalIncome | currency }}</div>
-				<div class="page-widget-title w-100 text-center mb-0 mt-3">Ingresos</div>
+				<div class="page-widget-title w-100 text-center mb-0 mt-3">Income</div>
 			</div>
 		</div>
 		<div class="col-3">
@@ -25,7 +25,7 @@
 				<div class="number" [ngClass]="{ 'text-danger': totalGainOrLoss < 0, 'text-success': totalGainOrLoss >= 0 }">
 					{{ totalGainOrLoss | currency }}
 				</div>
-				<div class="page-widget-title w-100 text-center mb-0 mt-3">Ganancia o pérdida</div>
+				<div class="page-widget-title w-100 text-center mb-0 mt-3">Profit or loss</div>
 			</div>
 		</div>
 	</div>
@@ -33,13 +33,13 @@
 	<div class="row">
 		<div class="col-6">
 			<div class="page-widget">
-				<div class="page-widget-title">Ventas brutas</div>
+				<div class="page-widget-title">Total sales</div>
 				<canvas
 					baseChart
 					[data]="{
 						datasets: [
 							{
-								label: 'Ventas',
+								label: 'Sales',
 								data: lastSales,
 								backgroundColor: 'rgba(22, 165, 131, 0.2)',
 								borderColor: 'rgba(22, 165, 131, 0.8)',
@@ -57,13 +57,13 @@
 		</div>
 		<div class="col-6">
 			<div class="page-widget">
-				<div class="page-widget-title">Productos más vendidos</div>
+				<div class="page-widget-title">Top-selling products</div>
 				<table class="table table-hover">
 					<thead class="table-light">
 						<tr>
-							<th>Cantidad</th>
-							<th>Producto</th>
-							<th>Variante</th>
+							<th>Quantity</th>
+							<th>Product</th>
+							<th>Variant</th>
 						</tr>
 					</thead>
 					<tbody>

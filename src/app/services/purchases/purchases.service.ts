@@ -16,8 +16,8 @@ export class PurchasesService {
 		new Purchase(
 			1,
 			new Date(2021, 7, 19),
-			'Shenzhen Fealink Technology',
-			'1er pedido Alibaba - Varitas con Luz LED',
+			'Supplier #1',
+			'1st order - Wands!',
 			228,
 			21.81,
 			205,
@@ -29,8 +29,8 @@ export class PurchasesService {
 		new Purchase(
 			2,
 			new Date(2021, 10, 26),
-			'Shenzhen Fealink Technology',
-			'2er pedido Alibaba - Varitas con Luz, Varitas Normales, Collares y Llaveros',
+			'Supplier #1',
+			'2nd order - Magic stuff...',
 			716,
 			65.43,
 			580,
@@ -47,8 +47,8 @@ export class PurchasesService {
 		new Purchase(
 			3,
 			new Date(2022, 1, 7),
-			'Shenzhen Fealink Technology',
-			'3er pedido Alibaba - Varitas con Luz LED',
+			'Supplier #2',
+			'3rd order - More wands!',
 			220.4,
 			24.57,
 			267,

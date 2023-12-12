@@ -12,13 +12,12 @@ export class ProductsService {
 	productsChanged = new Subject<Product[]>();
 
 	private products: Product[] = [
-		new Product(1, 'Varita de resina con luz LED', 0, 599, new Date()),
-		new Product(2, 'Varita de resina con núcleo de metal', 0, 499, new Date()),
-		new Product(3, 'Collar giratiempo', 0, 149, new Date()),
-		new Product(4, 'Collar snitch', 0, 149, new Date()),
-		new Product(5, 'Collar reliquias de la muerte', 0, 149, new Date()),
-		new Product(6, 'Llavero personaje 3D de PVC', 0, 149, new Date()),
-		new Product(7, 'Gastos de Envío (a cargo del cliente)', 0, 0, new Date()),
+		new Product(1, 'Lightning magic wand', 0, 599, new Date()),
+		new Product(2, 'Regular magic wand', 0, 499, new Date()),
+		new Product(3, 'Time-turner necklace', 0, 149, new Date()),
+		new Product(4, 'Golden snitch necklace', 0, 149, new Date()),
+		new Product(5, 'Deathly hallows necklace', 0, 149, new Date()),
+		new Product(6, '3D keychain', 0, 149, new Date()),
 	];
 
 	constructor(private tableRefreshService: TableRefreshService, private productVariantsService: ProductVariantService) {}

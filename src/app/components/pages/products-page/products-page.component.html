@@ -1,8 +1,8 @@
 <app-page-header
-    pageTitle="Productos"
+    pageTitle="Products"
     [breadcrumbItems]="[
-        {name: 'Inicio', path: ''},
-        {name: 'Productos'}
+        {name: 'Home', path: ''},
+        {name: 'Products'}
     ]"
 ></app-page-header>
 
@@ -14,7 +14,7 @@
                     <button class="btn btn-sm btn-success">
 							  <div>
 									<i class="fas fa-plus me-2"></i>
-									<span>Agregar producto</span>
+									<span>Add product</span>
 							  </div>
                     </button>
                 </a>
@@ -23,13 +23,13 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Descripcion</th>
-                            <th>Cantidad en stock</th>
+                            <th>Description</th>
+                            <th>Quantity in stock</th>
                             <!-- <th>Costo promedio (USD)</th>
                             <th>Costo promedio (MXN)</th> -->
-                            <th>Precio recomendado</th>
-                            <th>Variantes</th>
-                            <th>Acciones</th>
+                            <th>Recommended price</th>
+                            <th>Variants</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,8 +45,8 @@
                             </td>
                             <td>
                                 <div class="d-flex justify-content-center">
-                                    <a title="Editar" [routerLink]="[product.Id, 'edit']" class="btn-action"><i class="fas fa-edit"></i></a>
-                                    <button title="Eliminar" (click)="openModal(product)" class="btn-transparent btn-action"><i class="fas fa-trash"></i></button>
+                                    <a title="Edit" [routerLink]="[product.Id, 'edit']" class="btn-action"><i class="fas fa-edit"></i></a>
+                                    <button title="Delete" (click)="openModal(product)" class="btn-transparent btn-action"><i class="fas fa-trash"></i></button>
                                 </div>
                             </td>
                         </tr>

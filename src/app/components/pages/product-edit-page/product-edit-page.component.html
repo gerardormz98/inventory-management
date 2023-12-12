@@ -1,10 +1,10 @@
 <app-page-header
-	pageTitle="{{ isEditMode ? 'Editar' : 'Agregar' }} producto"
+	pageTitle="{{ isEditMode ? 'Edit' : 'Add' }} Product"
 	backUrl="/products"
 	[breadcrumbItems]="[
-		{ name: 'Inicio', path: '' },
-		{ name: 'Productos', path: '/products' },
-		{ name: isEditMode ? 'Editar' : 'Agregar' }
+		{ name: 'Home', path: '' },
+		{ name: 'Products', path: '/products' },
+		{ name: isEditMode ? 'Edit' : 'Add' }
 	]"
 ></app-page-header>
 
@@ -25,11 +25,11 @@
 				</div>
 
 				<form [formGroup]="form" (ngSubmit)="onSaveProduct()">
-					<label for="description">Descripción</label>
+					<label for="description">Description</label>
 					<input type="text" formControlName="description" class="form-control" id="description" name="description" />
 					<br />
 
-					<label for="recommendedPrice">Precio recomendado</label>
+					<label for="recommendedPrice">Recommended price</label>
 					<input
 						type="number"
 						formControlName="recommendedPrice"
@@ -40,8 +40,8 @@
 					<br />
 
 					<div>
-						<button type="submit" class="btn btn-primary" [disabled]="!form.valid">Guardar</button>
-						<button type="button" class="btn btn-link ms-2 text-secondary" (click)="onCancel()">Cancelar</button>
+						<button type="submit" class="btn btn-primary" [disabled]="!form.valid">Save</button>
+						<button type="button" class="btn btn-link ms-2 text-secondary" (click)="onCancel()">Cancel</button>
 					</div>
 				</form>
 			</div>
@@ -51,10 +51,10 @@
 	<div class="row" *ngIf="isEditMode">
 		<div class="col-12">
 			<div class="page-widget">
-				<div class="page-widget-title">Variantes</div>
+				<div class="page-widget-title">Variants</div>
 				<button class="btn btn-sm btn-success d-block" [disabled]="isEditingVariant" (click)="onEditVariant(0)">
 					<i class="fas fa-plus"></i>
-					<span class="ms-2">Agregar variante</span>
+					<span class="ms-2">Add variant</span>
 				</button>
 
 				<div class="mt-3" *ngIf="isEditingVariant">
@@ -71,10 +71,10 @@
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>Descripción de producto</th>
-							<th>Modelo</th>
-							<th>Cantidad en stock</th>
-							<th>Acciones</th>
+							<th>Product description</th>
+							<th>Model</th>
+							<th>Quantity in stock</th>
+							<th>Actions</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -84,10 +84,10 @@
 							<td>{{ variant.Description }}</td>
 							<td>{{ variant.InStock }}</td>
 							<td class="d-flex justify-content-center">
-								<button title="Editar" (click)="onEditVariant(variant.Id)" [disabled]="isEditingVariant" class="btn-transparent btn-action">
+								<button title="Edit" (click)="onEditVariant(variant.Id)" [disabled]="isEditingVariant" class="btn-transparent btn-action">
 									<i class="fas fa-edit"></i>
 								</button>
-								<button title="Eliminar" (click)="openModal(variant)" class="btn-transparent btn-action" *ngIf="product.Variants.length > 1">
+								<button title="Delete" (click)="openModal(variant)" class="btn-transparent btn-action" *ngIf="product.Variants.length > 1">
 									<i class="fas fa-trash"></i>
 								</button>
 							</td>

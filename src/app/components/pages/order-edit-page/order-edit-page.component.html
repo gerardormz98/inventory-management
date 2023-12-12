@@ -1,10 +1,10 @@
 <app-page-header
-	pageTitle="{{ isEditMode ? 'Editar' : 'Nueva' }} Venta {{ isEditMode ? '#' + order.Id : '' }}"
+	pageTitle="{{ isEditMode ? 'Edit' : 'New' }} Order {{ isEditMode ? '#' + order.Id : '' }}"
 	backUrl="/orders"
 	[breadcrumbItems]="[
-		{ name: 'Inicio', path: '' },
-		{ name: 'Ventas', path: '/orders' },
-		{ name: isEditMode ? 'Editar' : 'Nueva' }
+		{ name: 'Home', path: '' },
+		{ name: 'Sales', path: '/orders' },
+		{ name: isEditMode ? 'Edit' : 'New' }
 	]"
 ></app-page-header>
 
@@ -13,17 +13,18 @@
 		<div class="row">
 			<div class="col-12">
 				<div class="page-widget">
-					<h5 class="page-widget-title d-block">Datos Generales</h5>
+					<h5 class="page-widget-title d-block">General Information</h5>
 
 					<div class="row">
 						<div class="col-6">
-							<label for="date">Fecha</label>
+							<label for="date">Date</label>
 							<input type="date" formControlName="date" class="form-control" id="date" name="date" appAutofocus />
 						</div>
 
 						<div class="col-6">
-							<label for="platform">Plataforma de Venta</label>
+							<label for="platform">Plataform</label>
 							<select formControlName="platform" class="form-select" name="platform" id="platform">
+								<option value="Amazon">Amazon</option>
 								<option value="MercadoShop">MercadoShop</option>
 								<option value="MercadoLibre">MercadoLibre</option>
 								<option value="Facebook">Facebook</option>
@@ -36,7 +37,7 @@
 
 					<div class="row">
 						<div class="col-12">
-							<label for="client">Cliente</label>
+							<label for="client">Client</label>
 							<input type="text" formControlName="client" class="form-control" id="client" name="client" />
 						</div>
 					</div>
@@ -45,11 +46,11 @@
 
 					<div class="row">
 						<div class="col-3">
-							<label for="commission">Comisiones</label>
+							<label for="commission">Commission</label>
 							<input type="number" formControlName="commission" class="form-control" id="commission" name="commission" />
 						</div>
 						<div class="col-3">
-							<label for="shippingCost">Costo de Envío</label>
+							<label for="shippingCost">Shipping Cost</label>
 							<input
 								type="number"
 								formControlName="shippingCost"
@@ -59,7 +60,7 @@
 							/>
 						</div>
 						<div class="col-3">
-							<label for="IVAWithholding">IVA Retenido</label>
+							<label for="IVAWithholding">IVA Withholding</label>
 							<input
 								type="number"
 								formControlName="IVAWithholding"
@@ -69,7 +70,7 @@
 							/>
 						</div>
 						<div class="col-3">
-							<label for="ISRWithholding">ISR Retenido</label>
+							<label for="ISRWithholding">ISR Withholding</label>
 							<input
 								type="number"
 								formControlName="ISRWithholding"
@@ -82,11 +83,11 @@
 				</div>
 
 				<div class="page-widget mt-3">
-					<h5 class="page-widget-title d-block">Productos de la Orden</h5>
+					<h5 class="page-widget-title d-block">Order Details</h5>
 
 					<div formArrayName="orderDetails">
 						<button type="button" class="btn btn-sm btn-success" (click)="onAddDetail()">
-							<i class="fas fa-plus me-2"></i>Agregar
+							<i class="fas fa-plus me-2"></i>Add
 						</button>
 
 						<br />
@@ -96,7 +97,7 @@
 							<div [formGroup]="detail" class="mb-3">
 								<div class="row">
 									<div class="col-4">
-										<label for="product">Producto</label>
+										<label for="product">Product</label>
 										<select
 											formControlName="product"
 											(change)="onChangeProduct(i, detail.get('product')?.value)"
@@ -111,7 +112,7 @@
 									</div>
 
 									<div class="col-4">
-										<label for="productVariant">Variante</label>
+										<label for="productVariant">Variant</label>
 										<select
 											formControlName="productVariant"
 											class="form-select"
@@ -130,7 +131,7 @@
 									<div class="col-4 d-flex justify-content-between align-items-end">
 										<div class="d-flex w-100">
 											<div class="flex-fill">
-												<label for="quantity">Cantidad</label>
+												<label for="quantity">Quantity</label>
 												<input
 													type="number"
 													formControlName="quantity"
@@ -140,7 +141,7 @@
 												/>
 											</div>
 											<div class="flex-fill ms-3">
-												<label for="unitPrice">Precio Unitario</label>
+												<label for="unitPrice">Unit Price</label>
 												<input
 													type="number"
 													formControlName="unitPrice"
@@ -169,13 +170,13 @@
 					<div class="fs-6">
 						<span>Total: <b>{{ getCurrentOrderDetailTotal() | currency }}</b></span>
 						<span class="mx-2">/</span>
-						<span>Comisiones: <b class="text-danger">{{ getCurrentOrderCommissions() | currency }}</b></span>
+						<span>Commission: <b class="text-danger">{{ getCurrentOrderCommissions() | currency }}</b></span>
 						<span class="mx-2">/</span>
-						<span>Ingreso: <b class="text-success">{{ getCurrentOrderRevenue() | currency }}</b></span>
+						<span>Revenue: <b class="text-success">{{ getCurrentOrderRevenue() | currency }}</b></span>
 					</div>
 					<div>
-						<button type="button" class="btn btn-link ms-2 text-secondary" (click)="onCancel()">Cancelar</button>
-						<button type="submit" class="btn btn-primary" [disabled]="!form.valid">Guardar</button>
+						<button type="button" class="btn btn-link ms-2 text-secondary" (click)="onCancel()">Cancel</button>
+						<button type="submit" class="btn btn-primary" [disabled]="!form.valid">Save</button>
 					</div>
 				</div>
 			</div>

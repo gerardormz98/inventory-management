@@ -1,4 +1,4 @@
-<app-page-header pageTitle="Ventas" [breadcrumbItems]="[{ name: 'Inicio', path: '' }, { name: 'Ventas' }]"></app-page-header>
+<app-page-header pageTitle="Sales" [breadcrumbItems]="[{ name: 'Home', path: '' }, { name: 'Sales' }]"></app-page-header>
 
 <div class="container-fluid">
 	<div class="row">
@@ -7,7 +7,7 @@
 				<button routerLink="/orders/new" class="btn btn-sm btn-success">
 					<div>
 						<i class="fas fa-plus me-2"></i>
-						<span>Nueva venta</span>
+						<span>New Order</span>
 					</div>
 				</button>
 
@@ -15,16 +15,16 @@
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>Fecha</th>
-							<th>Plataforma de Venta</th>
-							<th>Cliente</th>
+							<th>Date</th>
+							<th>Platform</th>
+							<th>Client</th>
 							<th>Total</th>
-							<th>Comisiones</th>
-							<th>Costo de envío</th>
-							<th>Retenciones</th>
-							<th>Ingreso</th>
-							<th>Detalles</th>
-							<th>Acciones</th>
+							<th>Commission</th>
+							<th>Shipping Cost</th>
+							<th>Withholdings</th>
+							<th>Revenue</th>
+							<th>Details</th>
+							<th>Actions</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -39,7 +39,7 @@
 							<td class="text-danger">{{ order.IVAWithholding + order.ISRWithholding | currency }}</td>
 							<td class="text-success">{{ order.Revenue | currency }}</td>
 							<td>
-								<button class="btn btn-sm btn-secondary" [routerLink]="[order.Id]"><span>Detalles</span></button>
+								<button class="btn btn-sm btn-secondary" [routerLink]="[order.Id]"><span>Details</span></button>
 							</td>
 							<td>
 								<div class="d-flex justify-content-center">

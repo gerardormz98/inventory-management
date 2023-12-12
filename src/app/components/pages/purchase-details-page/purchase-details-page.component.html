@@ -1,10 +1,10 @@
 <app-page-header
-	pageTitle="Detalles de Compra #{{ purchaseId }}"
+	pageTitle="Purchase Details - #{{ purchaseId }}"
 	backUrl="/purchases"
 	[breadcrumbItems]="[
-		{ name: 'Inicio', path: '' },
-		{ name: 'Compras', path: '/purchases' },
-		{ name: 'Detalle' }
+		{ name: 'Home', path: '' },
+		{ name: 'Purchases', path: '/purchases' },
+		{ name: 'Details' }
 	]"
 ></app-page-header>
 
@@ -13,37 +13,37 @@
 		<div class="col-8">
 			<div class="page-widget">
 				<div class="d-flex justify-content-between align-items-start">
-					<h5 class="page-widget-title">Datos Generales</h5>
-					<span class="badge rounded-pill bg-success">Completada</span>
+					<h5 class="page-widget-title">General Information</h5>
+					<span class="badge rounded-pill bg-success">Completed</span>
 				</div>
 
 				<hr class="mt-0" />
 
 				<div class="mb-2">
-					<b class="me-2">Fecha:</b>
+					<b class="me-2">Date:</b>
 					<span>{{ purchase.Date | date: "dd/MM/YYYY" }}</span>
 				</div>
 				<div class="mb-2">
-					<b class="me-2">Proveedor:</b>
+					<b class="me-2">Supplier:</b>
 					<span>{{ purchase.Supplier }}</span>
 				</div>
 				<div class="mb-2">
-					<b class="me-2">Descripción:</b>
+					<b class="me-2">Description:</b>
 					<span>{{ purchase.Description }}</span>
 				</div>
 
-				<button [routerLink]="['/purchases', purchase.Id, 'edit']" class="btn btn-sm btn-secondary mt-2"><span>Editar Compra</span></button>
+				<button [routerLink]="['/purchases', purchase.Id, 'edit']" class="btn btn-sm btn-secondary mt-2"><span>Edit Purchase</span></button>
 			</div>
 
 			<div class="page-widget">
-				<h5 class="page-widget-title">Productos del pedido</h5>
+				<h5 class="page-widget-title">Order Details</h5>
 				<table class="table table-hover">
 					<thead class="table-light">
 						<tr>
-							<th>Cantidad</th>
-							<th>Producto</th>
-							<th>Variante</th>
-							<th>Costo Unitario</th>
+							<th>Quantity</th>
+							<th>Product</th>
+							<th>Variant</th>
+							<th>Unit Price</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -60,28 +60,28 @@
 
 		<div class="col-4">
 			<div class="page-widget">
-				<h5 class="page-widget-title">Resumen</h5>
+				<h5 class="page-widget-title">Summary</h5>
 				<hr class="mt-0" />
 				<table class="table table-hover">
 					<tbody>
 						<tr>
-							<td>Total Mercancía</td>
+							<td>Goods Cost</td>
 							<td>{{ purchase.GoodsCostMXN | currency }}</td>
 						</tr>
 						<tr>
-							<td>Comisiones</td>
+							<td>Commission</td>
 							<td>{{ purchase.CommissionMXN | currency }}</td>
 						</tr>
 						<tr>
-							<th>Costo de Envío</th>
+							<th>Shipping Cost</th>
 							<td>{{ purchase.ShippingCostMXN | currency }}</td>
 						</tr>
 						<tr>
-							<th>Gastos de Importación</th>
+							<th>Import Duties</th>
 							<td>{{ purchase.ImportCostMXN | currency }}</td>
 						</tr>
 						<tr class="table-light fw-bold">
-							<th>Costo Total</th>
+							<th>Total Cost</th>
 							<td class="text-danger">
 								{{ purchase.TotalMXN | currency }}
 							</td>

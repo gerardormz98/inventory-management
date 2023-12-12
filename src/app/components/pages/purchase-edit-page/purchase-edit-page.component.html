@@ -1,10 +1,10 @@
 <app-page-header
-	pageTitle="{{ isEditMode ? 'Editar' : 'Nuevo' }} Pedido {{ isEditMode ? '#' + purchase.Id : '' }}"
+	pageTitle="{{ isEditMode ? 'Edit' : 'New' }} Purchase {{ isEditMode ? '#' + purchase.Id : '' }}"
 	backUrl="/purchases"
 	[breadcrumbItems]="[
-		{ name: 'Inicio', path: '' },
-		{ name: 'Compras', path: '/Purchases' },
-		{ name: isEditMode ? 'Editar' : 'Nueva' }
+		{ name: 'Home', path: '' },
+		{ name: 'Purchases', path: '/purchases' },
+		{ name: isEditMode ? 'Edit' : 'New' }
 	]"
 ></app-page-header>
 
@@ -13,16 +13,16 @@
 		<div class="row">
 			<div class="col-12">
 				<div class="page-widget">
-					<h5 class="page-widget-title d-block">Datos Generales</h5>
+					<h5 class="page-widget-title d-block">General Information</h5>
 
 					<div class="row">
 						<div class="col-6">
-							<label for="date">Fecha</label>
+							<label for="date">Date</label>
 							<input type="date" formControlName="date" class="form-control" id="date" name="date" appAutofocus />
 						</div>
 
 						<div class="col-6">
-							<label for="supplier">Proveedor</label>
+							<label for="supplier">Supplier</label>
 							<input type="text" formControlName="supplier" class="form-control" id="supplier" name="supplier" />
 						</div>
 					</div>
@@ -31,7 +31,7 @@
 
 					<div class="row">
 						<div class="col-12">
-							<label for="description">Descripción</label>
+							<label for="description">Description</label>
 							<textarea
 								rows="3"
 								formControlName="description"
@@ -46,7 +46,7 @@
 
 					<div class="row">
 						<div class="col-2">
-							<label for="goodsCostUSD">Costo de mercancía (USD)</label>
+							<label for="goodsCostUSD">Goods Cost (USD)</label>
 							<input
 								type="number"
 								formControlName="goodsCostUSD"
@@ -56,7 +56,7 @@
 							/>
 						</div>
 						<div class="col-2">
-							<label for="commissionUSD">Comisiones (USD)</label>
+							<label for="commissionUSD">Commission (USD)</label>
 							<input
 								type="number"
 								formControlName="commissionUSD"
@@ -66,7 +66,7 @@
 							/>
 						</div>
 						<div class="col-2">
-							<label for="shippingCostUSD">Costo de Envío (USD)</label>
+							<label for="shippingCostUSD">Shipping Cost (USD)</label>
 							<input
 								type="number"
 								formControlName="shippingCostUSD"
@@ -76,7 +76,7 @@
 							/>
 						</div>
 						<div class="col-2">
-							<label for="goodsCommissionAndShippingMXN">Total pedido (MXN)</label>
+							<label for="goodsCommissionAndShippingMXN">Total (MXN)</label>
 							<input
 								type="number"
 								formControlName="goodsCommissionAndShippingMXN"
@@ -86,7 +86,7 @@
 							/>
 						</div>
 						<div class="col-2">
-							<label for="importCostUSD">Gastos de Importación (USD)</label>
+							<label for="importCostUSD">Import Duties (USD)</label>
 							<input
 								type="number"
 								formControlName="importCostUSD"
@@ -96,7 +96,7 @@
 							/>
 						</div>
 						<div class="col-2">
-							<label for="importCostMXN">Gastos de Importación (MXN)</label>
+							<label for="importCostMXN">Import Duties (MXN)</label>
 							<input
 								type="number"
 								formControlName="importCostMXN"
@@ -109,11 +109,11 @@
 				</div>
 
 				<div class="page-widget mt-3">
-					<h5 class="page-widget-title d-block">Productos del Pedido</h5>
+					<h5 class="page-widget-title d-block">Order Details</h5>
 
 					<div formArrayName="purchaseDetails">
 						<button type="button" class="btn btn-sm btn-success" (click)="onAddDetail()">
-							<i class="fas fa-plus me-2"></i>Agregar
+							<i class="fas fa-plus me-2"></i>Add
 						</button>
 
 						<br />
@@ -123,7 +123,7 @@
 							<div [formGroup]="detail" class="mb-3">
 								<div class="row">
 									<div class="col-3">
-										<label for="product">Producto</label>
+										<label for="product">Product</label>
 										<select
 											formControlName="product"
 											(change)="onChangeProduct(i, detail.get('product')?.value)"
@@ -138,7 +138,7 @@
 									</div>
 
 									<div class="col-3">
-										<label for="productVariant">Variante</label>
+										<label for="productVariant">Variant</label>
 										<select
 											formControlName="productVariant"
 											class="form-select"
@@ -157,7 +157,7 @@
 									<div class="col-6 d-flex justify-content-between align-items-end">
 										<div class="d-flex w-100">
 											<div class="flex-fill">
-												<label for="quantity">Cantidad</label>
+												<label for="quantity">Quantity</label>
 												<input
 													type="number"
 													formControlName="quantity"
@@ -167,7 +167,7 @@
 												/>
 											</div>
 											<div class="flex-fill ms-3">
-												<label for="unitPriceUSD">Precio Unitario (USD)</label>
+												<label for="unitPriceUSD">Unit Price (USD)</label>
 												<input
 													type="number"
 													formControlName="unitPriceUSD"
@@ -177,7 +177,7 @@
 												/>
 											</div>
 											<div class="flex-fill ms-3">
-												<label for="unitPriceMXN">Precio Unitario (MXN)</label>
+												<label for="unitPriceMXN">Unit Price (MXN)</label>
 												<input
 													type="number"
 													formControlName="unitPriceMXN"
@@ -206,12 +206,12 @@
 					<div class="fs-6">
 						<span
 							>Total (MXN): <b class="text-danger">{{ getCurrentPurchaseTotal() | currency }}</b>
-							<span class="text-secondary"> (pedido + importación)</span></span
+							<span class="text-secondary"> (goods + import)</span></span
 						>
 					</div>
 					<div>
-						<button type="button" class="btn btn-link ms-2 text-secondary" (click)="onCancel()">Cancelar</button>
-						<button type="submit" class="btn btn-primary" [disabled]="!form.valid">Guardar</button>
+						<button type="button" class="btn btn-link ms-2 text-secondary" (click)="onCancel()">Cancel</button>
+						<button type="submit" class="btn btn-primary" [disabled]="!form.valid">Save</button>
 					</div>
 				</div>
 			</div>
